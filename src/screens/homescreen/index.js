@@ -10,6 +10,11 @@ export default function HomeScreen({ navigation }) {
         title="Go to Details"
         onPress={() => navigation.navigate("Details")}
       />
+      <Button
+        style={{margin: 10}}
+        title="create transaction"
+        onPress={() => navigation.navigate("CreateTransaction")}
+      />
     </View>
   );
 }
