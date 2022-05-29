@@ -45,8 +45,8 @@
 //           <option value="21">overig</option>
 //         </select>
 //         <select {...register("type", { required: true })}>
-//           <option value="expenses">expenses</option>
-//           <option value="income">income</option>
+          // <option value="expenses">expenses</option>
+          // <option value="income">income</option>
 //         </select>
 //         <input type="submit" />
 //       </form>
@@ -54,9 +54,10 @@
 //   );
 // }
 import React, { useState } from "react";
-import { Text, View, TextInput, Button, Alert } from "react-native";
+import { Text, View, TextInput, Button, Alert, TextInputBase } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import styles from "./styles";
+import RNPickerSelect from 'react-native-picker-select';
 import axios from "axios";
 
 export default function CreateTransaction() {
@@ -119,6 +120,7 @@ export default function CreateTransaction() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            keyboardType="decimal-pad"
           />
         )}
         name="price"
@@ -138,6 +140,8 @@ export default function CreateTransaction() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            type="number"
+            keyboardType="number-pad"
           />
         )}
         name="vat"
@@ -151,13 +155,13 @@ export default function CreateTransaction() {
           required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="catagory"
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
+          <RNPickerSelect
+            onValueChange={onChange}
+            items={[
+                { label: 'thirt', value: 'tshirt' },
+                { label: 'drukker', value: 'drukker' },
+            ]}
+        />
         )}
         name="catagory"
       />
@@ -170,13 +174,13 @@ export default function CreateTransaction() {
           required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="type of product"
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
+          <RNPickerSelect
+            onValueChange={onChange}
+            items={[
+                { label: 'income', value: 'income' },
+                { label: 'expense', value: 'expenses' },
+            ]}
+        />
         )}
         name="type"
       />
