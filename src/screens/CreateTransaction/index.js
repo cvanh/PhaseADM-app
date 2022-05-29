@@ -1,64 +1,21 @@
-// import React, { useState } from "react";
-// import { Button, View, Text } from "react-native";
-// import { set, useForm } from "react-hook-form";
-// import axios from "axios";
-
-// export default function CreateTransaction() {
-//   const { register, handleSubmit } = useForm();
-//   const [MessageBox, setMessageBox] = useState("");
-//   const onSubmit = (data) => {
-//     console.log(data);
-
-//     axios
-//       .post("http://localhost:3000/api/create", {
-//         data: data,
-//       })
-//       .then((req) =>
-//         (req.status === 200) ?
-//         setMessageBox('yes everyting is in order') :
-//         setMessageBox('something went wrong')
-//       )
-//       .catch((err) => {
-//         console.error(err);
-//         setMessageBox(`ERROR: ${err}`);
-//       });
-//   };
-
-//   return (
-//     <View>
-//         {/* <Text>{MessageBox}</Text> */}
-//       <form onSubmit={handleSubmit(onSubmit)}>
-//         <input
-//           placeholder="product name"
-//           {...register("product", { required: true, placeholder: "kaas" })}
-//         />
-//         <input
-//           placeholder="21.00"
-//           {...register("price", { required: true, pattern: "/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)$" })}
-//         />
-//         <select {...register("vat", { required: true })}>
-//           <option value="21">21%</option>
-//           <option value="9">9%</option>
-//           <option value="0">0%</option>
-//         </select>
-//         <select {...register("catagory", { required: true })}>
-//           <option value="21">overig</option>
-//         </select>
-//         <select {...register("type", { required: true })}>
-          // <option value="expenses">expenses</option>
-          // <option value="income">income</option>
-//         </select>
-//         <input type="submit" />
-//       </form>
-//     </View>
-//   );
-// }
 import React, { useState } from "react";
-import { Text, View, TextInput, Button, Alert, TextInputBase } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import styles from "./styles";
-import RNPickerSelect from 'react-native-picker-select';
+import {
+  Text,
+  View,
+  TextInput,
+  Button
+} from "react-native";
 import axios from "axios";
+import { useForm, Controller } from "react-hook-form";
+
+// import the type of catagories the user can select 
+import catagories from "../../../config/catagories.json"
+
+// import the stylesheet
+import styles from "./styles";
+
+// for the select menu
+import RNPickerSelect from "react-native-picker-select";
 
 export default function CreateTransaction() {
   const {
@@ -103,9 +60,9 @@ export default function CreateTransaction() {
             value={value}
           />
         )}
-        name="product_name"
+        name="ProductName"
       />
-      {errors.product_name && <Text>This is required.</Text>}
+      {errors.ProductName && <Text>This is required.</Text>}
 
       <Controller
         control={control}
@@ -156,12 +113,14 @@ export default function CreateTransaction() {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <RNPickerSelect
+            placeholder={{
+              label: 'Select a catagory...',
+              value: null,
+              color: '#000000',
+            }}
             onValueChange={onChange}
-            items={[
-                { label: 'thirt', value: 'tshirt' },
-                { label: 'drukker', value: 'drukker' },
-            ]}
-        />
+            items={catagories}
+          />
         )}
         name="catagory"
       />
@@ -175,12 +134,17 @@ export default function CreateTransaction() {
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <RNPickerSelect
+            placeholder={{
+              label: 'Select a cashflow type...',
+              value: null,
+              color: '#000000',
+            }}
             onValueChange={onChange}
             items={[
-                { label: 'income', value: 'income' },
-                { label: 'expense', value: 'expenses' },
+              { label: "income", value: "income" },
+              { label: "expense", value: "expenses" },
             ]}
-        />
+          />
         )}
         name="type"
       />
