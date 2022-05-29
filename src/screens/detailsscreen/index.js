@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default async function DetailsScreen({ navigation }) {
   useEffect(() => {
-    const data = await axios.get("http://localhost:3000/api/get?limit=2&WooCommerce=false")
+    const data = axios.get("http://localhost:3000/api/get?limit=2&WooCommerce=false")
   }, []);
   
     return (
