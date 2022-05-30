@@ -46,6 +46,8 @@ export default function CreateTransaction() {
   return (
     <View>
       <Text>{MessageBox}</Text>
+
+      <Text>name</Text>
       <Controller
         control={control}
         rules={{
@@ -64,6 +66,7 @@ export default function CreateTransaction() {
       />
       {errors.ProductName && <Text>This is required.</Text>}
 
+      <Text>price</Text>
       <Controller
         control={control}
         rules={{
@@ -84,6 +87,7 @@ export default function CreateTransaction() {
       />
       {errors.price && <Text>This is required.</Text>}
 
+      <Text>vat</Text>
       <Controller
         control={control}
         rules={{
@@ -105,6 +109,7 @@ export default function CreateTransaction() {
       />
       {errors.vat && <Text>This is required.</Text>}
 
+      <Text>catagory</Text>
       <Controller
         control={control}
         rules={{
@@ -126,6 +131,8 @@ export default function CreateTransaction() {
       />
       {errors.catagory && <Text>This is required.</Text>}
 
+
+            <Text>type</Text>
       <Controller
         control={control}
         rules={{
