@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  Button
-} from "react-native";
+import { Text, View, TextInput, Button } from "react-native";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 
-// import the type of catagories the user can select 
-import catagories from "../../../config/catagories.json"
+// import the type of catagories the user can select
+import catagories from "../../../config/catagories.json";
 
 // import the stylesheet
 import styles from "./styles";
@@ -116,12 +111,12 @@ export default function CreateTransaction() {
           maxLength: 100,
           required: true,
         }}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({ field: { onChange } }) => (
           <RNPickerSelect
             placeholder={{
-              label: 'Select a catagory...',
+              label: "Select a catagory...",
               value: null,
-              color: '#000000',
+              color: "#000000",
             }}
             onValueChange={onChange}
             items={catagories}
@@ -131,20 +126,19 @@ export default function CreateTransaction() {
       />
       {errors.catagory && <Text>This is required.</Text>}
 
-
-            <Text>type</Text>
+      <Text>type</Text>
       <Controller
         control={control}
         rules={{
           maxLength: 100,
           required: true,
         }}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({ field: { onChange } }) => (
           <RNPickerSelect
             placeholder={{
-              label: 'Select a cashflow type...',
+              label: "Select a cashflow type...",
               value: null,
-              color: '#000000',
+              color: "#000000",
             }}
             onValueChange={onChange}
             items={[
