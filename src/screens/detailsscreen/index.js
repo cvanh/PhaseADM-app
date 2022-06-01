@@ -10,7 +10,7 @@ export default function DetailsScreen({ navigation }) {
   useEffect(() => {
     const fetch = async () => {
       const api = await axios
-        .get("http://localhost:3000/api/get?limit=2&WooCommerce=false")
+        .get("http://10.52.9.33:3000/api/get?limit=2&WooCommerce=false")
         .catch((err) => {
           Alert.alert("ERROR", err.toString());
         });
@@ -27,7 +27,11 @@ export default function DetailsScreen({ navigation }) {
         <Loading />
       ) : (
         data.transactions.map((element) => (
-          <Transaction key={element.id} data={element} />
+          <Transaction
+            key={element.id}
+            data={element}
+            navigation={navigation}
+          />
         ))
       )}
 
