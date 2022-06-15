@@ -3,8 +3,7 @@
     "name": "PhaseADM-app",
     "slug": "PhaseADM-app",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "description": ""
   }
 }
