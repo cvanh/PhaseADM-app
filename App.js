@@ -13,8 +13,10 @@ import EditTransaction from "./src/screens/EditTransaction/index.js";
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const user = SecureStore.getItemAsync("user");
-  console.log(user);
+  const [user, setUser] = React.useState();
+  SecureStore.getItemAsync("user").then((data) => {
+    setUser(data);
+  });
 
   return (
     <NavigationContainer>
@@ -28,6 +30,7 @@ function App() {
               component={CreateTransaction}
             />
             <Stack.Screen name="EditTransaction" component={EditTransaction} />
+            <Stack.Screen name="Login" component={LoginScreen} />
           </>
         ) : (
           <Stack.Screen name="Login" component={LoginScreen} />

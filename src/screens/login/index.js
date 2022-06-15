@@ -1,28 +1,68 @@
 import * as React from "react";
-import { View, Text } from "react-native";
-import { TextInput } from "react-native-web";
+import { Controller, useForm } from "react-hook-form";
+import { Text, View, TextInput, Button } from "react-native";
 import styles from "./styles";
-
-async function getValueFor(key) {
-  let result = await SecureStore.getItemAsync(key);
-  if (result) {
-    alert("🔐 Here's your value 🔐 \n" + result);
-  } else {
-    alert("No values stored under that key.");
-  }
-}
+import * as SecureStore from "expo-secure-store";
+import axios from "axios";
 
 export default function LoginScreen({ navigation }) {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    // handle login
+    // const api = await axios.post("http://localhost:3000/api/auth/signin/email",{body: data})
+
+    // store the combo
+    SecureStore.setItemAsync("user", JSON.stringify(data));
+
+    console.log(data);
+    navigation.push("Home");
+  };
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>login</Text>
-      <TextInput
-        style={styles.input}
-        onSubmitEditing={(event) => {
-          getValueFor(event.nativeEvent.text);
+      <Text>username</Text>
+      <Controller
+        control={control}
+        rules={{
+          required: true,
         }}
-        placeholder="Enter the key for the value you want to get"
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            placeholder="username"
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="username"
       />
+      {/* {errors.ProductName && <Text>This is required.</Text>} */}
+
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            placeholder="password"
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="password"
+      />
+      {/* {errors.ProductName && <Text>This is required.</Text>} */}
+
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }

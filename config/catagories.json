@@ -1,14 +1,18 @@
 [
-    {
-        "label": "thirt",
-        "value": "tshirt"
-    },
-    {
-        "label": "drukker",
-        "value": "drukker"
-    },
-    {
-        "label": "jumbotje",
-        "value": "jumbo"
-    }
+  {
+    "label": "thirt",
+    "value": "tshirt"
+  },
+  {
+    "label": "drukker",
+    "value": "drukker"
+  },
+  {
+    "label": "jumbotje",
+    "value": "jumbo"
+  },
+  {
+    "label": "test",
+    "value": "test"
+  }
 ]

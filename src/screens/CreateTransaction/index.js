@@ -12,7 +12,7 @@ import styles from "./styles";
 // for the select menu
 import RNPickerSelect from "react-native-picker-select";
 
-export default function CreateTransaction() {
+export default function CreateTransaction({ navigation }) {
   const {
     control,
     handleSubmit,
