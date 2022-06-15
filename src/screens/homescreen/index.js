@@ -5,8 +5,9 @@ import * as SecureStore from "expo-secure-store";
 export default function HomeScreen({ navigation }) {
   const [user, setUser] = React.useState();
   SecureStore.getItemAsync("user").then((data) => {
-    setUser(data);
+    setUser(JSON.parse(data));
   });
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Button
@@ -15,7 +16,7 @@ export default function HomeScreen({ navigation }) {
           SecureStore.deleteItemAsync("user") && navigation.push("Login");
         }}
       />
-      <Text>{user.username}</Text>
+      <Text>welcome {user?.username}</Text>
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
